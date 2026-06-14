@@ -1,0 +1,70 @@
+<div class="tn-auth-page-container">
+  <div class="tn-auth-form-card tn-register-wide-card">
+    <div class="tn-auth-logo-center">
+      <svg class="tn-logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L2 22H22L12 2Z" fill="#22C55E"/>
+      </svg>
+      <span class="tn-logo-text">TechNest</span>
+    </div>
+    
+    <h2 class="tn-auth-heading">Create Account</h2>
+    <p class="tn-auth-subtext">Join us today to explore premium tech gear.</p>
+
+    <div *ngIf="errorMessage" class="tn-global-error-banner">
+      <i class="bi bi-exclamation-triangle-fill"></i>
+      <span>{{ errorMessage }}</span>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="tn-form-row-2col">
+        <div class="tn-form-group">
+          <label for="first_name" class="tn-form-label">First Name</label>
+          <input type="text" id="first_name" formControlName="first_name" class="tn-form-control" [class.tn-invalid]="isInvalid('first_name')">
+          <div *ngIf="isInvalid('first_name')" class="tn-form-error">Required.</div>
+        </div>
+        <div class="tn-form-group">
+          <label for="last_name" class="tn-form-label">Last Name</label>
+          <input type="text" id="last_name" formControlName="last_name" class="tn-form-control" [class.tn-invalid]="isInvalid('last_name')">
+          <div *ngIf="isInvalid('last_name')" class="tn-form-error">Required.</div>
+        </div>
+      </div>
+
+      <div class="tn-form-group">
+        <label for="username" class="tn-form-label">Username</label>
+        <input type="text" id="username" formControlName="username" class="tn-form-control" [class.tn-invalid]="isInvalid('username')">
+        <div *ngIf="isInvalid('username')" class="tn-form-error">Username is required.</div>
+      </div>
+
+      <div class="tn-form-group">
+        <label for="email" class="tn-form-label">Email Address</label>
+        <input type="email" id="email" formControlName="email" class="tn-form-control" [class.tn-invalid]="isInvalid('email')" placeholder="you@example.com">
+        <div *ngIf="isInvalid('email')" class="tn-form-error">Provide a valid email.</div>
+      </div>
+
+      <div class="tn-form-row-2col">
+        <div class="tn-form-group">
+          <label for="password" class="tn-form-label">Password</label>
+          <input type="password" id="password" formControlName="password" class="tn-form-control" [class.tn-invalid]="isInvalid('password')">
+          <div *ngIf="isInvalid('password')" class="tn-form-error">Required.</div>
+        </div>
+        <div class="tn-form-group">
+          <label for="confirmPassword" class="tn-form-label">Confirm Password</label>
+          <input type="password" id="confirmPassword" formControlName="confirmPassword" class="tn-form-control" [class.tn-invalid]="isInvalid('confirmPassword')">
+          <div *ngIf="isInvalid('confirmPassword')" class="tn-form-error">Must match password.</div>
+        </div>
+      </div>
+
+      <button 
+        type="submit" 
+        class="tn-btn-primary tn-auth-submit-btn" 
+        [disabled]="registerForm.invalid || (authService.isLoading$ | async)">
+        <span *ngIf="!(authService.isLoading$ | async)">Register Account</span>
+        <span *ngIf="authService.isLoading$ | async)">Creating account...</span>
+      </button>
+    </form>
+
+    <div class="tn-auth-footer-redirect">
+      Already have an account? <a routerLink="/login">Sign in</a>
+    </div>
+  </div>
+</div>

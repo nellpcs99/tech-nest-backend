@@ -1,0 +1,16 @@
+.tn-register-wide-card {
+  max-width: 520px;
+}
+
+.tn-form-row-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media(max-width: 480px) {
+  .tn-form-row-2col {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

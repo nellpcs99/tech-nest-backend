@@ -1,0 +1,54 @@
+<div class="tn-container tn-section-padding">
+  <div class="tn-order-detail-header-nav">
+    <a routerLink="/orders" class="tn-back-to-orders"><i class="bi bi-arrow-left"></i> Back to Orders</a>
+  </div>
+
+  <app-spinner [show]="loading"></app-spinner>
+
+  <div class="tn-order-detail-view-card" *ngIf="!loading && order">
+    <div class="tn-order-id-bar">
+      <div>
+        <h2>Order #{{ order.id }}</h2>
+        <p class="tn-order-date-sub">Placed on {{ order.created_at | date:'longDate' }}</p>
+      </div>
+      <div>
+        <span class="tn-status-badge" [ngClass]="statusClass(order.status)">
+          {{ statusLabel(order.status) }}
+        </span>
+      </div>
+    </div>
+
+    <div class="tn-order-inner-grid">
+      <div class="tn-order-items-col">
+        <h3>Items In This Order</h3>
+        <div class="tn-mini-table-row tn-mth">
+          <div class="tn-mcell-product">Product</div>
+          <div class="tn-mcell-price">Unit Price</div>
+          <div class="tn-mcell-qty">Qty</div>
+          <div class="tn-mcell-sub">Subtotal</div>
+        </div>
+        
+        <div class="tn-mini-table-row tn-mtd" *ngFor="let item of order.items">
+          <div class="tn-mcell-product">
+            <strong>{{ item.product.name }}</strong>
+          </div>
+          <div class="tn-mcell-price">${{ item.unit_price }}</div>
+          <div class="tn-mcell-qty">{{ item.quantity }}</div>
+          <div class="tn-mcell-sub">${{ item.subtotal }}</div>
+        </div>
+
+        <div class="tn-order-total-recap-bar">
+          <span>Total Paid:</span>
+          <strong>${{ order.total }}</strong>
+        </div>
+      </div>
+
+      <div class="tn-order-meta-info-col">
+        <div class="tn-shipping-address-box">
+          <h4>Shipping Address</h4>
+          <p>{{ order.shipping_address }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

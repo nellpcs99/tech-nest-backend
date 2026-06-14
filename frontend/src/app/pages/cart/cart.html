@@ -1,0 +1,66 @@
+<div class="tn-container tn-section-padding">
+  <h1 class="tn-page-title-main">Shopping Cart</h1>
+
+  <app-spinner [show]="loading"></app-spinner>
+
+  <div *ngIf="!loading && (!cart || cart.items.length === 0)" class="tn-cart-empty-view">
+    <i class="bi bi-cart-x"></i>
+    <p>Your cart is currently empty.</p>
+    <a routerLink="/shop" class="tn-btn-primary">Return To Shop</a>
+  </div>
+
+  <div class="tn-cart-layout-grid" *ngIf="!loading && cart && cart.items.length > 0">
+    <div class="tn-cart-items-table-side">
+      <div class="tn-cart-header-row">
+        <div class="tn-th-product">Product</div>
+        <div class="tn-th-price">Price</div>
+        <div class="tn-th-qty">Quantity</div>
+        <div class="tn-th-subtotal">Subtotal</div>
+        <div class="tn-th-actions"></div>
+      </div>
+
+      <div class="tn-cart-item-row" *ngFor="let item of cart.items">
+        <div class="tn-td-product">
+          <img [src]="item.product.image" [alt]="item.product.name" class="tn-cart-item-img">
+          <div class="tn-cart-item-info-meta">
+            <h4><a [routerLink]="['/product', item.product.slug]">{{ item.product.name }}</a></h4>
+          </div>
+        </div>
+        <div class="tn-td-price">${{ item.product.price }}</div>
+        <div class="tn-td-qty">
+          <div class="tn-qty-selector">
+            <button (click)="updateQuantity(item, item.quantity - 1)" class="tn-qty-btn" [disabled]="item.quantity <= 1">-</button>
+            <span class="tn-qty-value">{{ item.quantity }}</span>
+            <button (click)="updateQuantity(item, item.quantity + 1)" class="tn-qty-btn" [disabled]="item.quantity >= item.product.stock">+</button>
+          </div>
+        </div>
+        <div class="tn-td-subtotal">${{ item.subtotal }}</div>
+        <div class="tn-td-actions">
+          <button (click)="removeItem(item.id)" class="tn-cart-remove-item-btn" title="Remove item">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="tn-cart-table-footer-actions">
+        <button (click)="clearCart()" class="tn-btn-outline tn-clear-cart-btn">Clear Cart</button>
+      </div>
+    </div>
+
+    <div class="tn-cart-summary-side">
+      <div class="tn-summary-sticky-card">
+        <h3>Order Summary</h3>
+        <div class="tn-summary-line">
+          <span>Total Items:</span>
+          <strong>{{ cart.total_items }}</strong>
+        </div>
+        <div class="tn-summary-line tn-summary-total">
+          <span>Subtotal:</span>
+          <strong>${{ cart.total }}</strong>
+        </div>
+        
+        <a routerLink="/checkout" class="tn-btn-primary tn-checkout-cta-btn">Proceed To Checkout</a>
+      </div>
+    </div>
+  </div>
+</div>

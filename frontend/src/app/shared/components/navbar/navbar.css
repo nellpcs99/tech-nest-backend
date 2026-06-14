@@ -1,0 +1,222 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #111827;
+  transition: box-shadow 0.2s ease;
+}
+
+.navbar--scrolled {
+  box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+
+.navbar__container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Logo */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+/* Links */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+
+.navbar__links a {
+  color: #D1D5DB;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.navbar__links a:hover,
+.navbar__links a.active {
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+}
+
+/* Actions */
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.navbar__icon-btn {
+  position: relative;
+  background: none;
+  border: none;
+  color: #D1D5DB;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.navbar__icon-btn:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+}
+
+/* Cart badge */
+.navbar__badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #22C55E;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.navbar__badge--inline {
+  position: static;
+  margin-left: 0.4rem;
+}
+
+/* Search bar */
+.navbar__search-bar {
+  background: #1A2333;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 0.75rem 1.5rem;
+}
+
+.navbar__search-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+}
+
+.navbar__search-inner i { color: #9CA3AF; font-size: 1rem; }
+
+.navbar__search-inner input {
+  flex: 1;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.navbar__search-inner input::placeholder { color: #6B7280; }
+
+.navbar__search-inner button {
+  background: none;
+  border: none;
+  color: #9CA3AF;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;
+  display: flex;
+}
+.navbar__search-inner button:hover { color: #fff; }
+
+/* Burger */
+.navbar__burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+}
+
+.navbar__burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #D1D5DB;
+  border-radius: 2px;
+  transition: all 0.25s ease;
+}
+
+.navbar__burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.navbar__burger.open span:nth-child(2) { opacity: 0; }
+.navbar__burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* Mobile menu */
+.navbar__mobile-menu {
+  background: #1A2333;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.navbar__mobile-menu a,
+.navbar__mobile-logout {
+  color: #D1D5DB;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.navbar__mobile-logout {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.navbar__mobile-menu a:hover,
+.navbar__mobile-logout:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar__links { display: none; }
+  .navbar__burger { display: flex; }
+}

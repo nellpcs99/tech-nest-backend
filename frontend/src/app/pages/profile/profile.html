@@ -1,0 +1,59 @@
+<div class="tn-container tn-section-padding">
+  <div class="tn-profile-page-wrapper">
+    <aside class="tn-profile-sidebar-menu">
+      <div class="tn-profile-avatar-block">
+        <div class="tn-avatar-circle">
+          <i class="bi bi-person-fill"></i>
+        </div>
+        <h3>{{ currentUser?.first_name }} {{ currentUser?.last_name }}</h3>
+        <p>{{ currentUser?.email }}</p>
+      </div>
+      <nav class="tn-profile-nav-links">
+        <a routerLink="/profile" class="tn-profile-nav-item tn-active"><i class="bi bi-person-gear"></i> Account Settings</a>
+        <a routerLink="/orders" class="tn-profile-nav-item"><i class="bi bi-box-seam"></i> Order History</a>
+      </nav>
+    </aside>
+
+    <main class="tn-profile-main-content">
+      <div class="tn-profile-form-card">
+        <h2>Account Settings</h2>
+        <p class="tn-form-card-subtitle">Update your personalized details and coordinates.</p>
+        
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+          <div class="tn-form-row-2col">
+            <div class="tn-form-group">
+              <label for="first_name" class="tn-form-label">First Name</label>
+              <input type="text" id="first_name" formControlName="first_name" class="tn-form-control" [class.tn-invalid]="isInvalid('first_name')">
+              <div *ngIf="isInvalid('first_name')" class="tn-form-error">Required.</div>
+            </div>
+            <div class="tn-form-group">
+              <label for="last_name" class="tn-form-label">Last Name</label>
+              <input type="text" id="last_name" formControlName="last_name" class="tn-form-control" [class.tn-invalid]="isInvalid('last_name')">
+              <div *ngIf="isInvalid('last_name')" class="tn-form-error">Required.</div>
+            </div>
+          </div>
+
+          <div class="tn-form-group">
+            <label for="email" class="tn-form-label">Email Address</label>
+            <input type="email" id="email" formControlName="email" class="tn-form-control" [class.tn-invalid]="isInvalid('email')">
+            <div *ngIf="isInvalid('email')" class="tn-form-error">Valid email required.</div>
+          </div>
+
+          <div class="tn-form-group">
+            <label for="phone" class="tn-form-label">Phone Number</label>
+            <input type="text" id="phone" formControlName="phone" class="tn-form-control" [class.tn-invalid]="isInvalid('phone')">
+          </div>
+
+          <div class="tn-form-group">
+            <label for="address" class="tn-form-label">Default Delivery Address</label>
+            <textarea id="address" formControlName="address" class="tn-form-control" rows="3" [class.tn-invalid]="isInvalid('address')"></textarea>
+          </div>
+
+          <button type="submit" class="tn-btn-primary tn-save-profile-btn" [disabled]="profileForm.invalid || profileForm.pristine">
+            Save Changes
+          </button>
+        </form>
+      </div>
+    </main>
+  </div>
+</div>

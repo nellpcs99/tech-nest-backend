@@ -1,0 +1,42 @@
+<div class="tn-container tn-section-padding">
+  <h1 class="tn-page-title-main">My Orders</h1>
+
+  <app-spinner [show]="loading"></app-spinner>
+
+  <div *ngIf="!loading && orders.length === 0" class="tn-no-orders-fallback">
+    <i class="bi bi-box-seam"></i>
+    <p>You haven't placed any orders yet.</p>
+    <a routerLink="/shop" class="tn-btn-primary">Start Shopping</a>
+  </div>
+
+  <div class="tn-orders-table-wrapper" *ngIf="!loading && orders.length > 0">
+    <table class="tn-orders-native-table">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Date</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>#{{ order.id }}</td>
+          <td>{{ order.created_at | date:'mediumDate' }}</td>
+          <td class="tn-orders-total-cell">${{ order.total }}</td>
+          <td>
+            <span class="tn-status-badge" [ngClass]="statusClass(order.status)">
+              {{ statusLabel(order.status) }}
+            </span>
+          </td>
+          <td>
+            <a [routerLink]="['/orders', order.id]" class="tn-btn-outline tn-order-view-details-btn">
+              View Details
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

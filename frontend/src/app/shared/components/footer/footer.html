@@ -1,0 +1,96 @@
+<footer class="footer">
+
+  <!-- Newsletter -->
+  <div class="footer__newsletter">
+    <div class="container">
+      <div class="footer__newsletter-inner">
+        <div>
+          <h3>Restez informé des nouveautés</h3>
+          <p>Inscrivez-vous et recevez nos meilleures offres tech.</p>
+        </div>
+        <div class="footer__newsletter-form">
+          <input
+            type="email"
+            placeholder="Votre adresse email"
+            [(ngModel)]="email"
+            (keyup.enter)="onNewsletter()"
+          />
+          <button class="btn btn-primary" (click)="onNewsletter()">S'inscrire</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main footer -->
+  <div class="footer__main">
+    <div class="container">
+      <div class="footer__grid">
+
+        <!-- Brand -->
+        <div class="footer__col footer__col--brand">
+          <div class="footer__logo">
+            <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="6" fill="#22C55E"/>
+              <path d="M7 9h14M7 14h8M7 19h10" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+            <span>TechNest</span>
+          </div>
+          <p>Top Tech Gear for Your Lifestyle. Qualité et innovation à portée de main.</p>
+          <div class="footer__social">
+            <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="footer__col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a routerLink="/">Accueil</a></li>
+            <li><a routerLink="/shop">Boutique</a></li>
+            <li><a routerLink="/shop" [queryParams]="{is_new_arrival: true}">Nouveautés</a></li>
+            <li><a routerLink="/shop" [queryParams]="{is_best_seller: true}">Best-sellers</a></li>
+          </ul>
+        </div>
+
+        <!-- Mon compte -->
+        <div class="footer__col">
+          <h4>Mon compte</h4>
+          <ul>
+            <li><a routerLink="/profile">Mon profil</a></li>
+            <li><a routerLink="/orders">Mes commandes</a></li>
+            <li><a routerLink="/cart">Mon panier</a></li>
+            <li><a routerLink="/login">Connexion</a></li>
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div class="footer__col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Livraison</a></li>
+            <li><a href="#">Retours</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer__bottom">
+    <div class="container">
+      <p>© {{ currentYear }} TechNest. Tous droits réservés.</p>
+      <div class="footer__bottom-links">
+        <a href="#">Confidentialité</a>
+        <a href="#">CGV</a>
+        <a href="#">Mentions légales</a>
+      </div>
+    </div>
+  </div>
+
+</footer>

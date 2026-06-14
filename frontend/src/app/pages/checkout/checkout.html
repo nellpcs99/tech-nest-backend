@@ -1,0 +1,59 @@
+<div class="tn-container tn-section-padding">
+  <h1 class="tn-page-title-main">Checkout</h1>
+
+  <div class="tn-checkout-layout-grid">
+    <div class="tn-checkout-form-side">
+      <div class="tn-checkout-card">
+        <h3>Shipping Information</h3>
+        
+        <div *ngIf="errorMessage" class="tn-global-error-banner">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          <span>{{ errorMessage }}</span>
+        </div>
+
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+          <div class="tn-form-group">
+            <label for="shipping_address" class="tn-form-label">Full Shipping Address</label>
+            <textarea 
+              id="shipping_address" 
+              formControlName="shipping_address" 
+              class="tn-form-control" 
+              [class.tn-invalid]="isInvalid('shipping_address')" 
+              rows="4" 
+              placeholder="123 Digital Street, City, Country">
+            </textarea>
+            <div *ngIf="isInvalid('shipping_address')" class="tn-form-error">
+              Shipping address is required.
+            </div>
+          </div>
+
+          <button 
+            type="submit" 
+            class="tn-btn-primary tn-place-order-btn" 
+            [disabled]="checkoutForm.invalid || submitting">
+            <i class="bi bi-credit-card" *ngIf="!submitting"></i>
+            <span *ngIf="!submitting">Place Order (${{ cart?.total }})</span>
+            <span *ngIf="submitting">Processing payment...</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="tn-checkout-summary-side">
+      <div class="tn-checkout-summary-card">
+        <h3>Your Order</h3>
+        <div class="tn-checkout-items-list">
+          <div class="tn-checkout-item-mini" *ngFor="let item of cart?.items">
+            <span class="tn-mini-name">{{ item.product.name }} <strong>× {{ item.quantity }}</strong></span>
+            <span class="tn-mini-subtotal">${{ item.subtotal }}</span>
+          </div>
+        </div>
+        
+        <div class="tn-summary-line tn-checkout-final-total">
+          <span>Total to Pay:</span>
+          <strong>${{ cart?.total }}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,192 @@
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <span class="hero__tag"><i class="bi bi-lightning-charge-fill"></i> Nouveautés 2025</span>
+      <h1 class="hero__title">Top Tech Gear<br>for Your <span class="hero__accent">Lifestyle</span></h1>
+      <p class="hero__subtitle">
+        Découvrez les meilleurs équipements tech : laptops, smartphones,
+        accessoires et bien plus. Livraison rapide, retours gratuits.
+      </p>
+      <div class="hero__actions">
+        <a routerLink="/shop" class="btn btn-primary btn-lg">
+          <i class="bi bi-bag"></i> Shop Now
+        </a>
+        <a routerLink="/shop" [queryParams]="{is_new_arrival: true}" class="btn btn-outline-light btn-lg">
+          Nouveautés
+        </a>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat"><span>10k+</span><p>Produits</p></div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat"><span>50k+</span><p>Clients</p></div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat"><span>4.9★</span><p>Note</p></div>
+      </div>
+    </div>
+    <div class="hero__visual">
+      <div class="hero__circle"></div>
+      <div class="hero__device">
+        <i class="bi bi-laptop"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     RÉASSURANCE
+══════════════════════════════════════ -->
+<section class="reassurance">
+  <div class="container">
+    <div class="reassurance__grid">
+      <div class="reassurance__item">
+        <i class="bi bi-truck"></i>
+        <div>
+          <h4>Livraison Gratuite</h4>
+          <p>Dès 50 000 XAF d'achat</p>
+        </div>
+      </div>
+      <div class="reassurance__item">
+        <i class="bi bi-arrow-counterclockwise"></i>
+        <div>
+          <h4>Retour 30 Jours</h4>
+          <p>Satisfait ou remboursé</p>
+        </div>
+      </div>
+      <div class="reassurance__item">
+        <i class="bi bi-headset"></i>
+        <div>
+          <h4>Support 24/7</h4>
+          <p>On est là pour vous</p>
+        </div>
+      </div>
+      <div class="reassurance__item">
+        <i class="bi bi-shield-check"></i>
+        <div>
+          <h4>Paiement Sécurisé</h4>
+          <p>Transactions chiffrées</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FEATURED PRODUCTS
+══════════════════════════════════════ -->
+<section class="section-padding">
+  <div class="container">
+    <h2 class="section-title">Produits en Vedette</h2>
+    <p class="section-subtitle">Notre sélection des meilleurs produits tech du moment</p>
+
+    @if (loading) {
+      <div class="skeleton-grid">
+        @for (i of [1,2,3,4]; track i) {
+          <div class="skeleton-card">
+            <div class="skeleton skeleton--img"></div>
+            <div class="skeleton skeleton--line"></div>
+            <div class="skeleton skeleton--line skeleton--short"></div>
+            <div class="skeleton skeleton--btn"></div>
+          </div>
+        }
+      </div>
+    } @else if (featured.length === 0) {
+      <div class="empty-state">
+        <i class="bi bi-box-seam"></i>
+        <h3>Aucun produit disponible</h3>
+      </div>
+    } @else {
+      <div class="grid-4">
+        @for (product of featured; track product.id) {
+          <app-product-card [product]="product" (addToCart)="onAddToCart($event)"></app-product-card>
+        }
+      </div>
+      <div class="text-center mt-8">
+        <a routerLink="/shop" class="btn btn-outline">Voir tous les produits</a>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BANNIÈRE PROMO
+══════════════════════════════════════ -->
+<section class="promo-banner">
+  <div class="container promo-banner__inner">
+    <div class="promo-banner__content">
+      <span class="promo-banner__tag">Offre limitée</span>
+      <h2>Boostez Votre Productivité</h2>
+      <p>Des équipements tech pensés pour les professionnels et les créatifs.</p>
+      <a routerLink="/shop" class="btn btn-primary btn-lg">Browse Now</a>
+    </div>
+    <div class="promo-banner__icons">
+      <i class="bi bi-cpu"></i>
+      <i class="bi bi-phone"></i>
+      <i class="bi bi-headphones"></i>
+      <i class="bi bi-smartwatch"></i>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     NEW ARRIVALS + BEST SELLERS
+══════════════════════════════════════ -->
+<section class="section-padding" style="background: var(--color-bg-gray);">
+  <div class="container">
+    <div class="split-sections">
+
+      <!-- New Arrivals -->
+      <div class="split-section">
+        <div class="split-section__header">
+          <h3><i class="bi bi-stars"></i> Nouveautés</h3>
+          <a routerLink="/shop" [queryParams]="{is_new_arrival: true}" class="split-section__link">
+            Voir tout <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+        @if (newArrivals.length > 0) {
+          <div class="mini-grid">
+            @for (product of newArrivals; track product.id) {
+              <app-product-card [product]="product" (addToCart)="onAddToCart($event)"></app-product-card>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Best Sellers -->
+      <div class="split-section">
+        <div class="split-section__header">
+          <h3><i class="bi bi-fire"></i> Best-Sellers</h3>
+          <a routerLink="/shop" [queryParams]="{is_best_seller: true}" class="split-section__link">
+            Voir tout <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+        @if (bestSellers.length > 0) {
+          <div class="mini-grid">
+            @for (product of bestSellers; track product.id) {
+              <app-product-card [product]="product" (addToCart)="onAddToCart($event)"></app-product-card>
+            }
+          </div>
+        }
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CTA FINAL
+══════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="container text-center">
+    <h2>Prêt à équiper votre lifestyle ?</h2>
+    <p>Rejoignez des milliers de clients satisfaits à travers le monde.</p>
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:2rem;">
+      <a routerLink="/shop" class="btn btn-primary btn-lg">Découvrir la boutique</a>
+      @if (!(auth.isLoggedIn$ | async)) {
+        <a routerLink="/register" class="btn btn-outline-light btn-lg">Créer un compte</a>
+      }
+    </div>
+  </div>
+</section>

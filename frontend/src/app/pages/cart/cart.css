@@ -1,0 +1,142 @@
+.tn-page-title-main {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+}
+
+.tn-cart-empty-view {
+  text-align: center;
+  padding: 4rem 0;
+}
+
+.tn-cart-empty-view i {
+  font-size: 3.5rem;
+  color: #9CA3AF;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.tn-cart-empty-view p {
+  margin-bottom: 1.5rem;
+  color: #6B7280;
+}
+
+.tn-cart-layout-grid {
+  display: flex;
+  gap: 2rem;
+}
+
+.tn-cart-items-table-side {
+  flex-grow: 1;
+}
+
+.tn-cart-summary-side {
+  width: 340px;
+  flex-shrink: 0;
+}
+
+/* Structure Custom de Table */
+.tn-cart-header-row {
+  display: flex;
+  background-color: #F9FAFB;
+  border: 1px solid #E5E7EB;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #6B7280;
+  text-transform: uppercase;
+}
+
+.tn-cart-item-row {
+  display: flex;
+  align-items: center;
+  border: 1px solid #E5E7EB;
+  border-top: none;
+  padding: 1rem;
+}
+
+.tn-th-product, .tn-td-product { width: 45%; }
+.tn-th-price, .tn-td-price { width: 15%; }
+.tn-th-qty, .tn-td-qty { width: 20%; }
+.tn-th-subtotal, .tn-td-subtotal { width: 15%; }
+.tn-th-actions, .tn-td-actions { width: 5%; text-align: right; }
+
+.tn-cart-item-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 12px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.tn-cart-item-info-meta {
+  display: inline-block;
+  vertical-align: middle;
+  width: calc(100% - 75px);
+}
+
+.tn-cart-item-info-meta h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.tn-cart-remove-item-btn {
+  background: none;
+  border: none;
+  color: #9CA3AF;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.tn-cart-remove-item-btn:hover { color: #EF4444; }
+
+.tn-cart-table-footer-actions {
+  padding: 1rem 0;
+}
+
+/* Summary Card */
+.tn-summary-sticky-card {
+  background-color: #F9FAFB;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.tn-summary-sticky-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid #E5E7EB;
+  padding-bottom: 0.75rem;
+}
+
+.tn-summary-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.tn-summary-total {
+  border-top: 1px solid #E5E7EB;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  font-size: 1.15rem;
+  color: #111827;
+}
+
+.tn-checkout-cta-btn {
+  width: 100%;
+  margin-top: 1.25rem;
+}
+
+@media (max-width: 991px) {
+  .tn-cart-layout-grid {
+    flex-direction: column;
+  }
+  .tn-cart-summary-side {
+    width: 100%;
+  }
+}

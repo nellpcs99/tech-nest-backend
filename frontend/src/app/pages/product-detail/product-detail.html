@@ -1,0 +1,131 @@
+<!-- Breadcrumb -->
+<div class="page-header">
+  <div class="container">
+    <nav class="breadcrumb">
+      <a routerLink="/">Accueil</a>
+      <i class="bi bi-chevron-right"></i>
+      <a routerLink="/shop">Boutique</a>
+      <i class="bi bi-chevron-right"></i>
+      <span>{{ product?.name || 'Produit' }}</span>
+    </nav>
+  </div>
+</div>
+
+<div class="container" style="padding-bottom: 4rem;">
+
+  @if (loading) {
+    <div class="detail-skeleton">
+      <div class="skeleton skeleton--img-lg"></div>
+      <div class="detail-skeleton__info">
+        <div class="skeleton skeleton--title"></div>
+        <div class="skeleton skeleton--line"></div>
+        <div class="skeleton skeleton--line skeleton--short"></div>
+        <div class="skeleton skeleton--price"></div>
+        <div class="skeleton skeleton--btn-lg"></div>
+      </div>
+    </div>
+  }
+
+  @else if (error) {
+    <div class="alert alert-danger">
+      <i class="bi bi-exclamation-circle"></i> {{ error }}
+      <a routerLink="/shop" class="btn btn-primary btn-sm" style="margin-left:1rem;">Retour boutique</a>
+    </div>
+  }
+
+  @else if (product) {
+    <div class="detail-layout">
+
+      <!-- Image -->
+      <div class="detail-image-wrap">
+        <div class="detail-badges">
+          @if (product.is_new_arrival) { <span class="badge badge-new">New</span> }
+          @if (product.is_on_sale && product.old_price) {
+            <span class="badge badge-sale">-{{ getDiscount() }}%</span>
+          }
+          @if (product.is_best_seller) {
+            <span class="badge" style="background:#F59E0B;color:#fff;">Best-seller</span>
+          }
+        </div>
+        <img [src]="getImageUrl(product.image)" [alt]="product.name" class="detail-image" />
+      </div>
+
+      <!-- Info -->
+      <div class="detail-info">
+        <p class="detail-category">
+          <a [routerLink]="['/shop']" [queryParams]="{category: product.category.slug}">
+            {{ product.category.name }}
+          </a>
+        </p>
+
+        <h1 class="detail-name">{{ product.name }}</h1>
+
+        @if (product.brand) {
+          <p class="detail-brand"><i class="bi bi-tag"></i> {{ product.brand }}</p>
+        }
+
+        <!-- Prix -->
+        <div class="detail-price">
+          <span class="detail-price__current">{{ product.price | currency:'XAF':'symbol':'1.0-0' }}</span>
+          @if (product.old_price) {
+            <span class="detail-price__old">{{ product.old_price | currency:'XAF':'symbol':'1.0-0' }}</span>
+            <span class="detail-price__discount">-{{ getDiscount() }}%</span>
+          }
+        </div>
+
+        <!-- Stock -->
+        <div class="detail-stock">
+          @if (product.stock === 0) {
+            <span class="stock-badge stock-badge--out"><i class="bi bi-x-circle"></i> Rupture de stock</span>
+          } @else if (product.stock <= 5) {
+            <span class="stock-badge stock-badge--low"><i class="bi bi-exclamation-circle"></i> Plus que {{ product.stock }} en stock</span>
+          } @else {
+            <span class="stock-badge stock-badge--ok"><i class="bi bi-check-circle"></i> En stock ({{ product.stock }} disponibles)</span>
+          }
+        </div>
+
+        <!-- Description -->
+        <div class="detail-description">
+          <p>{{ product.description }}</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Quantité + Panier -->
+        @if (product.stock > 0) {
+          <div class="detail-actions">
+            <div class="qty-control">
+              <button (click)="decrement()" [disabled]="quantity <= 1">
+                <i class="bi bi-dash"></i>
+              </button>
+              <span>{{ quantity }}</span>
+              <button (click)="increment()" [disabled]="quantity >= product.stock">
+                <i class="bi bi-plus"></i>
+              </button>
+            </div>
+
+            <button
+              class="btn btn-primary btn-lg detail-cart-btn"
+              (click)="onAddToCart()"
+              [disabled]="addingToCart"
+            >
+              @if (addingToCart) {
+                <span class="btn-spinner"></span> Ajout en cours...
+              } @else {
+                <i class="bi bi-bag-plus"></i> Ajouter au panier
+              }
+            </button>
+          </div>
+        }
+
+        <!-- Réassurance -->
+        <div class="detail-reassurance">
+          <div><i class="bi bi-truck"></i> Livraison gratuite dès 50 000 XAF</div>
+          <div><i class="bi bi-arrow-counterclockwise"></i> Retour sous 30 jours</div>
+          <div><i class="bi bi-shield-check"></i> Paiement sécurisé</div>
+        </div>
+      </div>
+
+    </div>
+  }
+</div>

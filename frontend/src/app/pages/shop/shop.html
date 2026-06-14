@@ -1,0 +1,147 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="container">
+    <h1>Notre Boutique</h1>
+    <nav class="breadcrumb">
+      <a routerLink="/">Accueil</a>
+      <i class="bi bi-chevron-right"></i>
+      <span>Boutique</span>
+    </nav>
+  </div>
+</div>
+
+<div class="container shop-layout">
+
+  <!-- ── Sidebar Filtres ─────────────── -->
+  <aside class="shop-sidebar">
+    <div class="sidebar-card">
+      <h3 class="sidebar-title">Filtres</h3>
+
+      <!-- Recherche -->
+      <div class="filter-group">
+        <label class="filter-label">Recherche</label>
+        <div class="search-input">
+          <i class="bi bi-search"></i>
+          <input
+            type="text"
+            placeholder="Nom du produit..."
+            [(ngModel)]="searchQuery"
+            (input)="onFilterChange()"
+          />
+        </div>
+      </div>
+
+      <!-- Catégories -->
+      <div class="filter-group">
+        <label class="filter-label">Catégorie</label>
+        <div class="category-list">
+          <button
+            class="category-btn"
+            [class.active]="selectedCategory === ''"
+            (click)="selectedCategory = ''; onFilterChange()"
+          >
+            <i class="bi bi-grid-3x3-gap"></i> Toutes
+          </button>
+          @for (cat of categories; track cat.id) {
+            <button
+              class="category-btn"
+              [class.active]="selectedCategory === cat.slug"
+              (click)="selectedCategory = cat.slug; onFilterChange()"
+            >
+              {{ cat.name }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- Tri -->
+      <div class="filter-group">
+        <label class="filter-label">Trier par</label>
+        <select class="form-control" [(ngModel)]="selectedOrdering" (change)="onFilterChange()">
+          @for (opt of orderingOptions; track opt.value) {
+            <option [value]="opt.value">{{ opt.label }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Filtres rapides -->
+      <div class="filter-group">
+        <label class="filter-label">Filtres rapides</label>
+        <div class="quick-filters">
+          <label class="checkbox-label">
+            <input type="checkbox" [(ngModel)]="showFeatured" (change)="onFilterChange()"/>
+            <span>En vedette</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" [(ngModel)]="showNewArrivals" (change)="onFilterChange()"/>
+            <span>Nouveautés</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" [(ngModel)]="showBestSellers" (change)="onFilterChange()"/>
+            <span>Best-sellers</span>
+          </label>
+        </div>
+      </div>
+
+      @if (hasActiveFilters()) {
+        <button class="btn btn-outline btn-block" (click)="resetFilters()">
+          <i class="bi bi-x-circle"></i> Réinitialiser
+        </button>
+      }
+    </div>
+  </aside>
+
+  <!-- ── Grille Produits ─────────────── -->
+  <main class="shop-main">
+
+    <!-- Barre de résultats -->
+    <div class="results-bar">
+      <span class="results-count">
+        @if (!loading) {
+          <strong>{{ products.length }}</strong> produit{{ products.length > 1 ? 's' : '' }} trouvé{{ products.length > 1 ? 's' : '' }}
+        }
+      </span>
+    </div>
+
+    <!-- Erreur -->
+    @if (error) {
+      <div class="alert alert-danger">
+        <i class="bi bi-exclamation-circle"></i> {{ error }}
+      </div>
+    }
+
+    <!-- Skeleton -->
+    @if (loading) {
+      <div class="shop-grid">
+        @for (i of [1,2,3,4,5,6,7,8]; track i) {
+          <div class="skeleton-card">
+            <div class="skeleton skeleton--img"></div>
+            <div class="skeleton skeleton--line"></div>
+            <div class="skeleton skeleton--line skeleton--short"></div>
+            <div class="skeleton skeleton--btn"></div>
+          </div>
+        }
+      </div>
+    }
+
+    <!-- Produits -->
+    @else if (products.length > 0) {
+      <div class="shop-grid">
+        @for (product of products; track product.id) {
+          <app-product-card [product]="product" (addToCart)="onAddToCart($event)"></app-product-card>
+        }
+      </div>
+    }
+
+    <!-- Vide -->
+    @else {
+      <div class="empty-state">
+        <i class="bi bi-search"></i>
+        <h3>Aucun produit trouvé</h3>
+        <p>Essayez de modifier vos filtres de recherche.</p>
+        <button class="btn btn-primary mt-4" (click)="resetFilters()">Voir tous les produits</button>
+      </div>
+    }
+
+  </main>
+</div>
