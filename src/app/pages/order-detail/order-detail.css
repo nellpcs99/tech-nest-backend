@@ -1,0 +1,201 @@
+.order-detail-page {
+  min-height: 80vh;
+  padding: 48px 0;
+  background: #F9FAFB;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.back-link {
+  color: #6B7280;
+  text-decoration: none;
+  font-size: .9rem;
+  display: inline-block;
+  margin-bottom: 8px;
+  transition: color .2s;
+}
+.back-link:hover { color: #22C55E; }
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+}
+
+.page-title { font-size: 1.8rem; font-weight: 700; color: #111827; margin-bottom: 4px; }
+.order-date { color: #6B7280; font-size: .9rem; }
+
+/* Badges */
+.status-badge {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: .82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  white-space: nowrap;
+}
+.badge-pending   { background: #FEF9C3; color: #854D0E; }
+.badge-paid      { background: #DCFCE7; color: #166534; }
+.badge-shipped   { background: #DBEAFE; color: #1E40AF; }
+.badge-delivered { background: #D1FAE5; color: #065F46; }
+.badge-cancelled { background: #FEE2E2; color: #991B1B; }
+
+/* Tracker */
+.status-tracker {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  padding: 28px 32px;
+  margin-bottom: 32px;
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex: 1;
+}
+.step-dot {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 2px solid #D1D5DB;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  transition: all .3s;
+}
+.step-dot.done { background: #22C55E; border-color: #22C55E; }
+.step-label {
+  margin-top: 8px;
+  font-size: .78rem;
+  color: #9CA3AF;
+  text-align: center;
+  font-weight: 500;
+}
+.step-label.done { color: #22C55E; font-weight: 600; }
+.step-line {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: #E5E7EB;
+  z-index: 0;
+}
+.step-line.done { background: #22C55E; }
+
+/* Layout */
+.detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+  align-items: start;
+}
+
+.detail-main { display: flex; flex-direction: column; gap: 20px; }
+
+/* Cards */
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  padding: 24px;
+}
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+/* Order items */
+.order-item {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #F9FAFB;
+}
+.order-item:last-child { border-bottom: none; }
+
+.item-img {
+  width: 72px; height: 72px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid #F3F4F6;
+  padding: 6px;
+  background: #FAFAFA;
+  flex-shrink: 0;
+}
+.item-info { flex: 1; }
+.item-name {
+  font-weight: 600;
+  color: #111827;
+  text-decoration: none;
+  font-size: .95rem;
+  display: block;
+  margin-bottom: 4px;
+}
+.item-name:hover { color: #22C55E; }
+.item-brand { color: #6B7280; font-size: .82rem; margin-bottom: 4px; }
+.item-unit  { color: #9CA3AF; font-size: .82rem; }
+
+.item-right { text-align: right; }
+.item-qty { display: block; color: #6B7280; font-size: .9rem; margin-bottom: 4px; }
+.item-sub { font-weight: 700; color: #111827; }
+
+.address-text {
+  color: #374151;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+/* Summary aside */
+.summary-card { margin-bottom: 16px; }
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  color: #374151;
+  margin-bottom: 12px;
+  font-size: .95rem;
+}
+.summary-row.total { font-weight: 700; font-size: 1.05rem; color: #111827; margin-top: 4px; }
+.free { color: #22C55E; font-weight: 600; }
+.summary-divider { border-top: 1px solid #F3F4F6; margin: 14px 0; }
+
+.btn-primary {
+  display: inline-block;
+  background: #22C55E;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .2s;
+  text-align: center;
+}
+.btn-primary:hover { background: #16A34A; }
+.btn-block { display: block; }
+
+.not-found { text-align: center; padding: 60px; }
+.not-found p { color: #6B7280; margin-bottom: 20px; }
+
+@media (max-width: 900px) {
+  .detail-layout { grid-template-columns: 1fr; }
+  .status-tracker { padding: 20px 16px; }
+  .detail-header { flex-direction: column; gap: 12px; }
+}

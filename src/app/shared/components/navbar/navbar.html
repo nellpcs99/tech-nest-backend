@@ -1,0 +1,94 @@
+<nav class="navbar" [class.navbar--scrolled]="scrolled">
+  <div class="navbar__container">
+
+    <!-- Logo -->
+    <a routerLink="/" class="navbar__logo" (click)="closeMenu()">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <rect width="28" height="28" rx="6" fill="#22C55E"/>
+        <path d="M7 9h14M7 14h8M7 19h10" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      <span>TechNest</span>
+    </a>
+
+    <!-- Liens centre (desktop) -->
+    <ul class="navbar__links">
+      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="closeMenu()">Accueil</a></li>
+      <li><a routerLink="/shop" routerLinkActive="active" (click)="closeMenu()">Boutique</a></li>
+      @if (auth.isLoggedIn$ | async) {
+        <li><a routerLink="/orders" routerLinkActive="active" (click)="closeMenu()">Commandes</a></li>
+        <li><a routerLink="/profile" routerLinkActive="active" (click)="closeMenu()">Profil</a></li>
+      }
+    </ul>
+
+    <!-- Actions droite -->
+    <div class="navbar__actions">
+
+      <!-- Recherche -->
+      <button class="navbar__icon-btn" (click)="toggleSearch()" title="Rechercher">
+        <i class="bi bi-search"></i>
+      </button>
+
+      <!-- Panier -->
+      @if (auth.isLoggedIn$ | async) {
+        <a routerLink="/cart" class="navbar__icon-btn navbar__cart">
+          <i class="bi bi-bag"></i>
+          @if ((cart.itemCount$ | async) ?? 0 > 0) {
+            <span class="navbar__badge">{{ cart.itemCount$ | async }}</span>
+          }
+        </a>
+      }
+
+      <!-- Auth -->
+      @if (auth.isLoggedIn$ | async) {
+        <button class="navbar__icon-btn" (click)="logout()" title="Déconnexion">
+          <i class="bi bi-box-arrow-right"></i>
+        </button>
+      } @else {
+        <a routerLink="/login" class="btn btn-primary btn-sm">Connexion</a>
+      }
+
+      <!-- Burger mobile -->
+      <button class="navbar__burger" (click)="toggleMenu()" [class.open]="menuOpen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Barre de recherche -->
+  @if (searchOpen) {
+    <div class="navbar__search-bar">
+      <div class="navbar__search-inner">
+        <i class="bi bi-search"></i>
+        <input
+          type="text"
+          placeholder="Rechercher un produit..."
+          [(ngModel)]="searchQuery"
+          (keyup.enter)="onSearch()"
+          autofocus
+        />
+        <button (click)="toggleSearch()"><i class="bi bi-x-lg"></i></button>
+      </div>
+    </div>
+  }
+
+  <!-- Menu mobile -->
+  @if (menuOpen) {
+    <div class="navbar__mobile-menu">
+      <a routerLink="/" (click)="closeMenu()"><i class="bi bi-house"></i> Accueil</a>
+      <a routerLink="/shop" (click)="closeMenu()"><i class="bi bi-grid"></i> Boutique</a>
+      @if (auth.isLoggedIn$ | async) {
+        <a routerLink="/cart" (click)="closeMenu()"><i class="bi bi-bag"></i> Panier
+          @if ((cart.itemCount$ | async) ?? 0 > 0) {
+            <span class="navbar__badge navbar__badge--inline">{{ cart.itemCount$ | async }}</span>
+          }
+        </a>
+        <a routerLink="/orders" (click)="closeMenu()"><i class="bi bi-receipt"></i> Commandes</a>
+        <a routerLink="/profile" (click)="closeMenu()"><i class="bi bi-person"></i> Profil</a>
+        <button class="navbar__mobile-logout" (click)="logout()"><i class="bi bi-box-arrow-right"></i> Déconnexion</button>
+      } @else {
+        <a routerLink="/login" (click)="closeMenu()"><i class="bi bi-person"></i> Connexion</a>
+        <a routerLink="/register" (click)="closeMenu()"><i class="bi bi-person-plus"></i> Inscription</a>
+      }
+    </div>
+  }
+</nav>

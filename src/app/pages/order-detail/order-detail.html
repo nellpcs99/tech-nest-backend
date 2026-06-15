@@ -1,0 +1,89 @@
+<div class="order-detail-page">
+  <div class="container">
+
+    <app-spinner *ngIf="loading" />
+
+    <ng-container *ngIf="!loading && order">
+
+      <!-- En-tête -->
+      <div class="detail-header">
+        <div>
+          <a routerLink="/orders" class="back-link">← Mes commandes</a>
+          <h1 class="page-title">Commande #{{ order.id }}</h1>
+          <p class="order-date">Passée le {{ order.created_at | date:'dd MMMM yyyy à HH:mm' }}</p>
+        </div>
+        <span [class]="'status-badge ' + statusClass(order.status)">{{ statusLabel(order.status) }}</span>
+      </div>
+
+      <!-- Tracker statut -->
+      <div class="status-tracker" *ngIf="order.status !== 'cancelled'">
+        <div class="step" *ngFor="let step of getSteps(); let last = last">
+          <div class="step-dot" [class.done]="step.done">
+            <svg *ngIf="step.done" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="white" viewBox="0 0 16 16">
+              <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+            </svg>
+          </div>
+          <span class="step-label" [class.done]="step.done">{{ step.label }}</span>
+          <div class="step-line" *ngIf="!last" [class.done]="step.done"></div>
+        </div>
+      </div>
+
+      <div class="detail-layout">
+
+        <!-- Articles commandés -->
+        <div class="detail-main">
+          <div class="card">
+            <h2 class="card-title">Articles commandés</h2>
+            <div class="order-item" *ngFor="let item of order.items">
+              <img [src]="item.product.image" [alt]="item.product.name" class="item-img" />
+              <div class="item-info">
+                <a [routerLink]="['/shop', item.product.slug]" class="item-name">{{ item.product.name }}</a>
+                <p class="item-brand">{{ item.product.brand }}</p>
+                <p class="item-unit">Prix unitaire : {{ item.unit_price | number:'1.2-2' }} FCFA</p>
+              </div>
+              <div class="item-right">
+                <span class="item-qty">× {{ item.quantity }}</span>
+                <span class="item-sub">{{ item.subtotal | number:'1.2-2' }} FCFA</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Adresse livraison -->
+          <div class="card">
+            <h2 class="card-title">Adresse de livraison</h2>
+            <p class="address-text">{{ order.shipping_address }}</p>
+          </div>
+        </div>
+
+        <!-- Résumé -->
+        <div class="detail-aside">
+          <div class="card summary-card">
+            <h2 class="card-title">Résumé</h2>
+            <div class="summary-row">
+              <span>Articles ({{ order.items.length }})</span>
+              <span>{{ order.total | number:'1.2-2' }} FCFA</span>
+            </div>
+            <div class="summary-row">
+              <span>Livraison</span>
+              <span class="free">Gratuite</span>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="summary-row total">
+              <span>Total</span>
+              <span>{{ order.total | number:'1.2-2' }} FCFA</span>
+            </div>
+          </div>
+
+          <a routerLink="/shop" class="btn-primary btn-block">Continuer les achats</a>
+        </div>
+
+      </div>
+    </ng-container>
+
+    <div *ngIf="!loading && !order" class="not-found">
+      <p>Commande introuvable.</p>
+      <a routerLink="/orders" class="btn-primary">Retour aux commandes</a>
+    </div>
+
+  </div>
+</div>

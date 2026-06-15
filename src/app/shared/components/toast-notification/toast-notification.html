@@ -1,0 +1,11 @@
+<div class="toast-container">
+  @for (toast of toastService.toasts$ | async; track trackById($index, toast)) {
+    <div class="toast toast--{{ toast.type }}">
+      <i class="bi {{ getIcon(toast.type) }}"></i>
+      <span>{{ toast.message }}</span>
+      <button class="toast__close" (click)="toastService.remove(toast.id)">
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+  }
+</div>

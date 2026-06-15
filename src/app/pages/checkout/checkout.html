@@ -1,0 +1,69 @@
+<div class="checkout-page">
+  <div class="container">
+    <h1 class="page-title">Finaliser la commande</h1>
+
+    <app-spinner *ngIf="loading" />
+
+    <ng-container *ngIf="!loading">
+
+      <div *ngIf="!cart || cart.items.length === 0" class="empty-state">
+        <p>Votre panier est vide.</p>
+        <a routerLink="/shop" class="btn-primary">Parcourir la boutique</a>
+      </div>
+
+      <div *ngIf="cart && cart.items.length > 0" class="checkout-layout">
+
+        <!-- Formulaire livraison -->
+        <div class="checkout-form-card">
+          <h2 class="section-title">Adresse de livraison</h2>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="shipping_address">Adresse complète</label>
+              <textarea
+                id="shipping_address"
+                formControlName="shipping_address"
+                rows="4"
+                placeholder="N° rue, quartier, ville, pays..."
+                [class.is-invalid]="f['shipping_address'].invalid && f['shipping_address'].touched"
+              ></textarea>
+              <div class="error-msg" *ngIf="f['shipping_address'].invalid && f['shipping_address'].touched">
+                <span *ngIf="f['shipping_address'].errors?.['required']">L'adresse est obligatoire.</span>
+                <span *ngIf="f['shipping_address'].errors?.['minlength']">Adresse trop courte (min. 10 caractères).</span>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary submit-btn" [disabled]="form.invalid || submitting">
+              <span *ngIf="!submitting">Confirmer la commande</span>
+              <span *ngIf="submitting">Traitement en cours...</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Récapitulatif -->
+        <div class="order-summary">
+          <h2 class="section-title">Récapitulatif</h2>
+          <div class="summary-items">
+            <div class="summary-item" *ngFor="let item of cart.items">
+              <div class="item-info">
+                <span class="item-name">{{ item.product.name }}</span>
+                <span class="item-qty">× {{ item.quantity }}</span>
+              </div>
+              <span class="item-price">{{ item.subtotal | number:'1.2-2' }} FCFA</span>
+            </div>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-row">
+            <span>Livraison</span>
+            <span class="free">Gratuite</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span>{{ cart.total | number:'1.2-2' }} FCFA</span>
+          </div>
+          <a routerLink="/cart" class="back-link">← Modifier le panier</a>
+        </div>
+
+      </div>
+    </ng-container>
+  </div>
+</div>

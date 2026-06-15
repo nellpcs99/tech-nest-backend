@@ -1,0 +1,49 @@
+<div class="orders-page">
+  <div class="container">
+    <h1 class="page-title">Mes Commandes</h1>
+
+    <app-spinner *ngIf="loading" />
+
+    <ng-container *ngIf="!loading">
+
+      <div *ngIf="orders.length === 0" class="empty-state">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#22C55E" viewBox="0 0 16 16">
+          <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"/>
+        </svg>
+        <h2>Aucune commande pour l'instant</h2>
+        <p>Parcourez notre boutique et passez votre première commande.</p>
+        <a routerLink="/shop" class="btn-primary">Découvrir les produits</a>
+      </div>
+
+      <div *ngIf="orders.length > 0" class="orders-list">
+        <div class="order-card" *ngFor="let order of orders">
+          <div class="order-header">
+            <div class="order-meta">
+              <span class="order-id">#{{ order.id }}</span>
+              <span [class]="'status-badge ' + statusClass(order.status)">{{ statusLabel(order.status) }}</span>
+            </div>
+            <span class="order-date">{{ order.created_at | date:'dd/MM/yyyy' }}</span>
+          </div>
+
+          <div class="order-items-preview">
+            <div class="preview-item" *ngFor="let item of order.items.slice(0, 3)">
+              <img [src]="item.product.image" [alt]="item.product.name" />
+            </div>
+            <div class="preview-more" *ngIf="order.items.length > 3">
+              +{{ order.items.length - 3 }}
+            </div>
+          </div>
+
+          <div class="order-footer">
+            <div class="order-info">
+              <span class="items-count">{{ order.items.length }} article(s)</span>
+              <span class="order-total">{{ order.total | number:'1.2-2' }} FCFA</span>
+            </div>
+            <a [routerLink]="['/orders', order.id]" class="btn-detail">Voir le détail →</a>
+          </div>
+        </div>
+      </div>
+
+    </ng-container>
+  </div>
+</div>

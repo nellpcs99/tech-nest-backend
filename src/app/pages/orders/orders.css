@@ -1,0 +1,123 @@
+.orders-page {
+  min-height: 80vh;
+  padding: 48px 0;
+  background: #F9FAFB;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 32px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80px 24px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+.empty-state svg { margin-bottom: 20px; }
+.empty-state h2 { font-size: 1.4rem; color: #111827; margin-bottom: 8px; }
+.empty-state p { color: #6B7280; margin-bottom: 24px; }
+
+.orders-list { display: flex; flex-direction: column; gap: 16px; }
+
+.order-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  padding: 24px;
+  transition: box-shadow .2s;
+}
+.order-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.order-meta { display: flex; align-items: center; gap: 12px; }
+.order-id { font-weight: 700; color: #111827; font-size: 1.05rem; }
+.order-date { color: #6B7280; font-size: .9rem; }
+
+/* Badges statuts */
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: .78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.badge-pending   { background: #FEF9C3; color: #854D0E; }
+.badge-paid      { background: #DCFCE7; color: #166534; }
+.badge-shipped   { background: #DBEAFE; color: #1E40AF; }
+.badge-delivered { background: #D1FAE5; color: #065F46; }
+.badge-cancelled { background: #FEE2E2; color: #991B1B; }
+
+.order-items-preview {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.preview-item img {
+  width: 56px; height: 56px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid #F3F4F6;
+  padding: 4px;
+  background: #FAFAFA;
+}
+.preview-more {
+  width: 56px; height: 56px;
+  border-radius: 8px;
+  border: 1px solid #F3F4F6;
+  background: #F9FAFB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6B7280;
+  font-weight: 600;
+  font-size: .9rem;
+}
+
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #F3F4F6;
+  padding-top: 16px;
+}
+.order-info { display: flex; flex-direction: column; gap: 2px; }
+.items-count { color: #6B7280; font-size: .85rem; }
+.order-total { font-weight: 700; color: #111827; font-size: 1.05rem; }
+
+.btn-detail {
+  color: #22C55E;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: .9rem;
+  transition: color .2s;
+}
+.btn-detail:hover { color: #16A34A; }
+
+.btn-primary {
+  display: inline-block;
+  background: #22C55E;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .2s;
+}
+.btn-primary:hover { background: #16A34A; }

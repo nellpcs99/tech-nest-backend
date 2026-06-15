@@ -1,1 +1,292 @@
-/* You can add global styles to this file, and also import other style files */
+/* =============================================
+   TechNest — Global Styles
+   ============================================= */
+
+/* CSS Variables */
+:root {
+  --color-primary: #22C55E;
+  --color-primary-hover: #16A34A;
+  --color-primary-light: #DCFCE7;
+  --color-danger: #EF4444;
+  --color-dark: #111827;
+  --color-dark-alt: #1A2333;
+  --color-dark-footer: #0F172A;
+  --color-bg: #FFFFFF;
+  --color-bg-gray: #F9FAFB;
+  --color-text: #111827;
+  --color-text-muted: #6B7280;
+  --color-border: #E5E7EB;
+  --radius-card: 10px;
+  --radius-btn: 6px;
+  --shadow-card: 0 2px 8px rgba(0,0,0,0.08);
+  --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.12);
+  --transition: 0.2s ease;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+ul, ol { list-style: none; }
+button { font-family: var(--font); cursor: pointer; border: none; outline: none; }
+input, textarea, select { font-family: var(--font); outline: none; }
+
+/* =============================================
+   Utility Classes
+   ============================================= */
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-padding { padding: 5rem 0; }
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  border-radius: var(--radius-btn);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all var(--transition);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+
+.btn-primary { background: var(--color-primary); color: #fff; }
+.btn-primary:hover { background: var(--color-primary-hover); transform: translateY(-1px); }
+
+.btn-outline { background: transparent; color: var(--color-primary); border: 2px solid var(--color-primary); }
+.btn-outline:hover { background: var(--color-primary); color: #fff; }
+
+.btn-dark { background: var(--color-dark); color: #fff; }
+.btn-dark:hover { background: #1f2937; }
+
+.btn-danger { background: var(--color-danger); color: #fff; }
+.btn-danger:hover { background: #dc2626; }
+
+.btn-sm { padding: 0.4rem 1rem; font-size: 0.8rem; }
+.btn-lg { padding: 0.85rem 2rem; font-size: 1rem; }
+.btn-block { width: 100%; }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* Bootstrap compat */
+.btn-outline-light {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.5);
+}
+.btn-outline-light:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: #fff;
+  color: #fff;
+}
+
+/* Form Elements */
+.form-group { margin-bottom: 1.25rem; }
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.4rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-btn);
+  font-size: 0.9rem;
+  color: var(--color-text);
+  background: #fff;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(34,197,94,0.15);
+}
+
+.form-control.is-invalid { border-color: var(--color-danger); }
+.form-control.is-invalid:focus { box-shadow: 0 0 0 3px rgba(239,68,68,0.15); }
+
+.invalid-feedback {
+  display: block;
+  color: var(--color-danger);
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-new { background: var(--color-primary); color: #fff; }
+.badge-sale { background: var(--color-danger); color: #fff; }
+
+.badge-status {
+  background: var(--color-bg-gray);
+  color: var(--color-text-muted);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.badge-status.pending   { background: #FEF3C7; color: #D97706; }
+.badge-status.paid      { background: #D1FAE5; color: #059669; }
+.badge-status.shipped   { background: #DBEAFE; color: #2563EB; }
+.badge-status.delivered { background: #D1FAE5; color: #16A34A; }
+.badge-status.cancelled { background: #FEE2E2; color: #DC2626; }
+
+/* Alert */
+.alert {
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-btn);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.alert-danger  { background: #FEE2E2; color: #DC2626; border: 1px solid #FECACA; }
+.alert-success { background: #D1FAE5; color: #059669; border: 1px solid #A7F3D0; }
+.alert-warning { background: #FEF3C7; color: #D97706; border: 1px solid #FDE68A; }
+
+/* Grid */
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+
+/* Text helpers */
+.text-muted    { color: var(--color-text-muted); }
+.text-primary  { color: var(--color-primary); }
+.text-danger   { color: var(--color-danger); }
+.text-center   { text-align: center; }
+.text-right    { text-align: right; }
+.font-bold     { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+
+/* Spacing */
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-8 { margin-top: 2rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-8 { margin-bottom: 2rem; }
+
+/* Price */
+.price-current { font-size: 1.1rem; font-weight: 700; color: var(--color-text); }
+.price-old     { font-size: 0.9rem; color: var(--color-danger); text-decoration: line-through; margin-left: 0.5rem; }
+
+/* Divider */
+.divider { height: 1px; background: var(--color-border); margin: 1.5rem 0; }
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+.empty-state i    { font-size: 4rem; margin-bottom: 1rem; color: var(--color-border); }
+.empty-state h3   { font-size: 1.25rem; color: var(--color-text); margin-bottom: 0.5rem; }
+
+/* Page Header */
+.page-header { background: var(--color-bg-gray); padding: 3rem 0; margin-bottom: 3rem; }
+.page-header h1 { font-size: 2rem; font-weight: 700; }
+.page-header .breadcrumb {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+.page-header .breadcrumb a:hover { color: var(--color-primary); }
+
+/* Card */
+.card {
+  background: #fff;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+/* ✅ CORRECTION : renommé en page-loading-overlay pour éviter le conflit avec shop.css */
+/* L'ancienne classe .loading-overlay causait un flash blanc plein écran sur toute la page */
+.page-loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .section-padding { padding: 3rem 0; }
+  .section-title   { font-size: 1.5rem; }
+  .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+  .container { padding: 0 1rem; }
+}
+
+@media (max-width: 480px) {
+  .btn-lg { padding: 0.75rem 1.5rem; }
+}
