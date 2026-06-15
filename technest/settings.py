@@ -131,11 +131,12 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
-# ── CORS ─────────────────────────────────────────────────────────────────────
-_cors_origins = config('CORS_ALLOWED_ORIGINS', default='http://localhost:4200')
-CORS_ALLOWED_ORIGINS = [o.strip() for o in _cors_origins.split(',') if o.strip()]
+## ── CORS ─────────────────────────────────────────────────────────────────────
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+    "https://tech-nest-backend-neon.vercel.app"
+]
 CORS_ALLOW_CREDENTIALS = True
-
 # ── Jazzmin — Thème Admin moderne ────────────────────────────────────────────
 JAZZMIN_SETTINGS = {
     # Titre affiché dans l'onglet du navigateur
